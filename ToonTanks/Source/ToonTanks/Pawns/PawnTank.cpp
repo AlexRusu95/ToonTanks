@@ -28,8 +28,14 @@ void APawnTank::BeginPlay()
 void APawnTank::HandleDestruction() 
 {
         Super::HandleDestruction();
-    // Hide player
-    // TODO create new function to handle this
+    bIsPlayerAlive = false;
+    SetActorHiddenInGame(true);
+    SetActorTickEnabled(false);
+}
+
+bool APawnTank::GetIsPlayerAlive() 
+{
+    return bIsPlayerAlive;
 }
 
 // Called every frame
