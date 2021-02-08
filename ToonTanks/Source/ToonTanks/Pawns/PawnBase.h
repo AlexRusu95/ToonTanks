@@ -51,4 +51,5 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Effects")
 	TSubclassOf<UCameraShakeBase> DeathShake;
 
+
 };

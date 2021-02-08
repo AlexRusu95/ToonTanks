@@ -29,6 +29,8 @@ protected:
 private:
 	void HandleGameStart();
 	void HandleGameOver(bool PlayerWon);
+	UFUNCTION()
+	void GoToMenu();
 
 	APawnTank* PlayerTank;
 	int32 TargetTurrets = 0;

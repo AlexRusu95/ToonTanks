@@ -2,6 +2,7 @@
 
 
 #include "ToonTanks/Pawns/PawnTurret.h"
+#include "DrawDebugHelpers.h"
 #include "Kismet/GameplayStatics.h"
 #include "PawnTank.h"
 
@@ -14,6 +15,7 @@ void APawnTurret::BeginPlay()
     GetWorld()->GetTimerManager().SetTimer(FireRateTimerHandle, this, &APawnTurret::CheckFireCondition, FireRate, true);
 	
     PlayerPawn = Cast<APawnTank>(UGameplayStatics::GetPlayerPawn(this, 0));
+
 }
 
 void APawnTurret::HandleDestruction() 
@@ -42,6 +44,26 @@ void APawnTurret::CheckFireCondition()
     {
         Fire();
     }
+}
+
+void APawnTurret::DrawDebugLineInGame() 
+{
+    FVector PlayerLocation = GetActorLocation();
+	FRotator PlayerRotation = GetActorRotation();
+    float Reach = FireRange;
+	FVector LineTraceEnd = PlayerLocation + PlayerRotation.Vector() * Reach;
+
+	DrawDebugLine(
+		GetWorld(),
+		PlayerLocation,
+		LineTraceEnd,
+		FColor(0, 0, 255),
+		false,
+		0.f,
+		0,
+		2.f
+	);
+
 }
 
 float APawnTurret::ReturnDistanceToPlayer() 

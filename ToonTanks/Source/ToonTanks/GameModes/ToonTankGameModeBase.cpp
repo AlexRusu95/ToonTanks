@@ -65,6 +65,15 @@ void AToonTankGameModeBase::HandleGameOver(bool PlayerWon)
     // else if turret destroyed player, show lose result
     // call blueprint version GameOver(bool)
     GameOver(PlayerWon);
+    FTimerHandle GoToMenuDelay;
+    GetWorld()->GetTimerManager().SetTimer(GoToMenuDelay, this, &AToonTankGameModeBase::GoToMenu, 10.f, true, 8.f);
+    GetWorld()->GetTimerManager().ClearAllTimersForObject(PlayerControllerRef);
+
+}
+
+void AToonTankGameModeBase::GoToMenu() 
+{
+    UGameplayStatics::OpenLevel(PlayerControllerRef, (FName("MainMenu")), false);
 }
 
 int32 AToonTankGameModeBase::GetTargetTurretCount() 
