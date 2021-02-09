@@ -3,6 +3,7 @@
 
 #include "ToonTanks/Pawns/PawnTurret.h"
 #include "DrawDebugHelpers.h"
+#include "GameFramework/Actor.h"
 #include "Kismet/GameplayStatics.h"
 #include "PawnTank.h"
 
@@ -44,26 +45,6 @@ void APawnTurret::CheckFireCondition()
     {
         Fire();
     }
-}
-
-void APawnTurret::DrawDebugLineInGame() 
-{
-    FVector PlayerLocation = GetActorLocation();
-	FRotator PlayerRotation = GetActorRotation();
-    float Reach = FireRange;
-	FVector LineTraceEnd = PlayerLocation + PlayerRotation.Vector() * Reach;
-
-	DrawDebugLine(
-		GetWorld(),
-		PlayerLocation,
-		LineTraceEnd,
-		FColor(0, 0, 255),
-		false,
-		0.f,
-		0,
-		2.f
-	);
-
 }
 
 float APawnTurret::ReturnDistanceToPlayer() 
